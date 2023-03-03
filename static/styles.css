@@ -1,0 +1,62 @@
+/* Reset default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Table styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* App styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.loading {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.btn {
+  background-color: #4caf50;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 12px 24px;
+}
+
+.btn:hover {
+  background-color: #3e8e41;
+}

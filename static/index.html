@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My App</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div v-if="error" class="error">
+            {{ error }}
+        </div>
+        <div v-else-if="loading" class="loading">
+            Loading...
+        </div>
+        <table v-else>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in items" :key="item.id">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.value }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                items: [],
+                loading: false,
+                error: null
+            },
+            mounted: function() {
+                this.loadData();
+            },
+            methods: {
+                loadData: function() {
+                    var self = this;
+                    self.loading = true;
+                    fetch('/api/data')
+                        .then(function(response) {
+                            if (!response.ok) {
+                                throw new Error(response.status + ': ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(function(data) {
+                            self.items = data;
+                        })
+                        .catch(function(error) {
+                            self.error = 'Error loading data: ' + error.message;
+                        })
+                        .finally(function() {
+                            self.loading = false;
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
